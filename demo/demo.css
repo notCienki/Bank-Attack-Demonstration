@@ -1,0 +1,522 @@
+/* Bazowe style dla całego dokumentu */
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    min-width: 980px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header i logo */
+.ipko-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 32px;
+}
+
+/* Sekcja użytkownika */
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.user-info {
+    margin-right: 15px;
+    text-align: right;
+}
+
+.user-name {
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.last-login {
+    font-size: 11px;
+    color: #999;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #003574;
+    font-size: 12px;
+    font-family: Tahoma, sans-serif;
+    padding: 0;
+}
+
+.logout-btn::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M18,5.984,16.588,7.4a6.5,6.5,0,1,1-9.179,0L5.992,5.987A8.5,8.5,0,1,0,18,5.984Z' fill='%23003574'/%3E%3Crect width='2' height='6' transform='translate(11 3.992)' fill='%23003574'/%3E%3Crect width='24' height='24' fill='none'/%3E%3C/svg%3E");
+    margin-right: 5px;
+}
+
+/* Powiadomienia */
+.notifications-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    position: relative;
+    padding: 0;
+}
+
+.notifications-btn::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg id='pko_icon_notification_nav_32_mobile' xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg id='Group_1614' data-name='Group 1614' transform='translate(411 1014)'%3E%3Crect id='Rectangle_1342' data-name='Rectangle 1342' width='32' height='32' transform='translate(-411 -1014)' fill='none'/%3E%3C/g%3E%3Cpath id='Path_1263' data-name='Path 1263' d='M22.289,7.335a.486.486,0,0,0-.3.141l0,0a.5.5,0,0,0,0,.706.5.5,0,0,0,.353.147h.008a.482.482,0,0,0,.344-.144l.008-.008a.483.483,0,0,0,.142-.343v0a.5.5,0,0,0-.5-.5h-.046M22.327,6l.008,0a1.832,1.832,0,0,1,1.831,1.833,1.834,1.834,0,0,1-1.828,1.832h-.008a1.833,1.833,0,0,1,0-3.667Z' transform='translate(-7.5 -2)' fill='%23003574'/%3E%3Cpath id='Path_1265' data-name='Path_1265' d='M25,25.615l-.856-1.452V21.279a5.188,5.188,0,0,0-1.429-3.211,5.473,5.473,0,0,0-8.093,0,5.181,5.181,0,0,0-1.431,3.21v2.883l-.856,1.452H25m2.334,1.333H10L11.857,23.8V21.279a6.828,6.828,0,0,1,13.619,0V23.8Z' transform='translate(-2.667 -4.281)' fill='%23003574'/%3E%3Crect id='Rectangle_5665' data-name='Rectangle_5665' width='32' height='32' fill='none'/%3E%3Cpath id='Subtraction_4' data-name='Subtraction 4' d='M1.334,0H0A2.67,2.67,0,0,0,2.667,2.667,2.669,2.669,0,0,0,5.333,0H4a1.325,1.325,0,0,1-.391.942,1.324,1.324,0,0,1-.942.391A1.335,1.335,0,0,1,1.334,0Z' transform='translate(13.333 24)' fill='%23003574'/%3E%3C/svg%3E");
+}
+
+.notification-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ca171d;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wyszukiwarka */
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    padding: 0;
+}
+
+.search-btn::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg id='pko_icon_zoom_nav_32_mobile' transform='translate(-267 -1014)'%3E%3Cg id='Group_14131' data-name='Group 14131' transform='translate(267 1014)'%3E%3Cpath id='Path_15905' data-name='Path 15905' d='M19.815,19.064a7.333,7.333,0,1,0-.991.892l3.591,3.989a1.306,1.306,0,0,0,1.883.1ZM9.977,18.1a6,6,0,1,1,8.474.445A6.007,6.007,0,0,1,9.977,18.1Z' transform='translate(0.231 0.581)' fill='%23003574'/%3E%3Crect id='Rectangle_5420' data-name='Rectangle 5420' width='32' height='32' fill='none' opacity='0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Menu górne */
+.top-menu {
+    background-color: #003574;
+    color: #fff;
+}
+
+.menu-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.menu-items li {
+    padding: 14px 20px;
+    cursor: pointer;
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 14px;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.menu-items li:hover {
+    background-color: #00295c;
+}
+
+.menu-items li.active {
+    background-color: #002c64;
+}
+
+.menu-items li.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #f2f2f2;
+}
+
+/* Główna zawartość */
+.content-wrapper {
+    padding: 20px 0;
+}
+
+.content {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.content-header-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.content-header-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.content-header h2 {
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    color: #333;
+    margin: 0;
+}
+
+/* Sekcje formularza */
+.form-sections {
+    margin-bottom: 20px;
+}
+
+.form-section {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.section-title {
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+/* Grupy formularza */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: normal;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Tahoma, sans-serif;
+    font-size: 12px;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #003574;
+}
+
+.form-group input.error {
+    border-color: #ca171d;
+}
+
+.error-message {
+    color: #ca171d;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.disabled-input {
+    background-color: #f2f2f2;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.input-hint {
+    display: block;
+    font-size: 11px;
+    color: #999;
+    margin-top: 3px;
+}
+
+input::placeholder {
+    color: #b5b5b5;
+}
+
+/* Przyciski akcji */
+.actions-container {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e6e6e6;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.primary-action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-primary {
+    background-color: #003574;
+    color: #fff;
+    border: none;
+    border-radius: 5px 0 5px 0;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #00295c;
+}
+
+.btn-primary:active {
+    background-color: #001f45;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #f2f2f2;
+}
+
+.btn-secondary:active {
+    background-color: #e6e6e6;
+}
+
+/* Podsumowanie */
+.summary {
+    margin: 20px 0;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    vertical-align: top;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.summary-table tr:last-child td {
+    border-bottom: none;
+}
+
+.summary-table td:first-child {
+    color: #666;
+    width: 240px;
+}
+
+.summary-table strong {
+    font-family: "PKOBankPolski-bold", sans-serif;
+    font-weight: bold;
+    color: #333;
+}
+
+.transaction-id {
+    margin: 20px 0;
+    padding-top: 10px;
+    font-size: 11px;
+    color: #999;
+}
+
+/* Ukrywanie elementów */
+.hidden {
+    display: none;
+}
+
+/* Ekran potwierdzenia */
+.confirmation-screen {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.confirmation-screen .transaction-id {
+    border-top: 0;
+}
+
+.success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.success-icon::before {
+    content: "";
+    position: absolute;
+    width: 26px;
+    height: 13px;
+    border-bottom: 4px solid white;
+    border-left: 4px solid white;
+    transform: rotate(-45deg);
+    top: 20px;
+    left: 17px;
+}
+
+.confirmation-title {
+    font-family: "PKOBankPolski", sans-serif;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.confirmation-message {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Stopka */
+.ipko-footer {
+    background-color: #f2f2f2;
+    border-top: 1px solid #e6e6e6;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links a {
+    color: #003574;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 11px;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #999;
+}
+
+.copyright {
+    color: #999;
+    font-size: 11px;
+}
+
+/* Responsywność */
+@media screen and (max-width: 980px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Animacja podczas przejść między krokami */
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.3s;
+}

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPKO - serwis transakcyjny PKO Banku Polskiego</title>
+    <link rel="icon" href="img/pkologo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="demo-fix-fonts.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+    <header class="ipko-header">
+        <div class="container logo-container">
+            <div class="logo-section">
+                <img src="img/ipko.svg" alt="iPKO" class="logo">
+            </div>
+            <div class="user-section">
+                <div class="user-actions">
+                    <button class="search-btn" title="Wyszukaj"></button>
+                    <button class="notifications-btn" title="Powiadomienia">
+                        <span class="notification-count">2</span>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">Jan Kowalski</div>
+                    <div class="last-login">Ostatnie logowanie: <span id="last-login-date">24.05.2023, 15:30</span></div>
+                </div>
+                <button class="logout-btn">Wyloguj</button>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="top-menu">
+        <div class="container">
+            <ul class="menu-items">
+                <li>Pulpit</li>
+                <li class="active">Płatności</li>
+                <li>Rachunki</li>
+                <li>Karty</li>
+                <li>Produkty</li>
+                <li>Oferta</li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container content-wrapper">
+        <div class="content">
+            <div class="content-header">
+                <div class="content-header-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#003574" d="M21.128,9.862l-.969.97a6.667,6.667,0,1,1-8.318,0l-.969-.97a8,8,0,1,0,10.256,0Z" transform="translate(-4 -4)" />
+                        <rect fill="#003574" width="1.333" height="5.333" transform="translate(11.333 4)" />
+                    </svg>
+                </div>
+                <h2>Przelew krajowy</h2>
+            </div>
+            
+            <div id="step1" class="form-step">
+                <div class="content-body">
+                    <form id="transferForm">
+                        <div class="form-sections">
+                            <div class="form-section">
+                                <h3 class="section-title">Rachunek, z którego wykonywany jest przelew</h3>
+                                <div class="form-group">
+                                    <label for="sourceAccount">Rachunek</label>
+                                    <input type="text" id="sourceAccount" value="Konto Przekorzystne 46 1020 5558 0000 8965 0250 2751" disabled class="disabled-input">
+                                    <span class="input-hint">Dostępne środki: 8 542,65 PLN</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-sections">
+                            <div class="form-section">
+                                <h3 class="section-title">Dane odbiorcy i przelewu</h3>
+                                <div class="form-group">
+                                    <label for="recipientName">Nazwa odbiorcy</label>
+                                    <input type="text" id="recipientName" name="recipientName" required>
+                                    <div id="name-error" class="error-message"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accountNumber">Numer rachunku odbiorcy</label>
+                                    <input type="text" id="accountNumber" name="accountNumber" placeholder="__ ____ ____ ____ ____ ____ ____" required>
+                                    <div id="account-error" class="error-message"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">Kwota</label>
+                                    <input type="text" id="amount" name="amount" placeholder="0,00" required>
+                                    <span class="input-hint">Waluta: PLN</span>
+                                    <div id="amount-error" class="error-message"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Tytuł przelewu</label>
+                                    <input type="text" id="title" name="title" required>
+                                    <div id="title-error" class="error-message"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="transferDate">Data przelewu</label>
+                                    <input type="text" id="transferDate" name="transferDate" value="Dziś" disabled class="disabled-input">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="actions-container">
+                            <div></div>
+                            <div class="primary-action">
+                                <button type="submit" class="btn-primary">Dalej</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="step2" class="form-step hidden">
+                <div class="content-body">
+                    <h3 class="section-title">Potwierdzenie przelewu</h3>
+                    <p>Sprawdź dane i potwierdź wykonanie przelewu</p>
+                    
+                    <div class="summary">
+                        <table class="summary-table">
+                            <tr>
+                                <td>Rachunek, z którego wykonywany jest przelew:</td>
+                                <td>Konto Przekorzystne<br>46 1020 5558 0000 8965 0250 2751</td>
+                            </tr>
+                            <tr>
+                                <td>Nazwa odbiorcy:</td>
+                                <td id="summary-name"></td>
+                            </tr>
+                            <tr>
+                                <td>Numer rachunku odbiorcy:</td>
+                                <td id="summary-account"></td>
+                            </tr>
+                            <tr>
+                                <td>Kwota:</td>
+                                <td><strong id="summary-amount"></strong> PLN</td>
+                            </tr>
+                            <tr>
+                                <td>Tytuł przelewu:</td>
+                                <td id="summary-title"></td>
+                            </tr>
+                            <tr>
+                                <td>Data realizacji:</td>
+                                <td>Dziś</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="transaction-id">
+                        Numer operacji: <strong>IPK24052023125487</strong>
+                    </div>
+                    
+                    <div class="actions-container">
+                        <div>
+                            <button id="backButton" class="btn-secondary">Wstecz</button>
+                        </div>
+                        <div class="primary-action">
+                            <button id="confirmButton" class="btn-primary">Wykonaj przelew</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="step3" class="form-step hidden">
+                <div class="content-body">
+                    <div class="confirmation-screen">
+                        <div class="success-icon"></div>
+                        <h3 class="confirmation-title">Przelew został przyjęty do realizacji</h3>
+                        <p class="confirmation-message">Operacja została przyjęta do realizacji. Szczegóły operacji znajdziesz w historii rachunku.</p>
+                        
+                        <div class="transaction-id">
+                            Numer operacji: <strong>IPK24052023125487</strong>
+                        </div>
+                        
+                        <div class="actions-container" style="justify-content: center; border-top: none;">
+                            <button id="newTransferButton" class="btn-primary">Wykonaj nowy przelew</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="ipko-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">Regulamin</a>
+                    <a href="#">Polityka prywatności</a>
+                    <a href="#">Opłaty i prowizje</a>
+                    <a href="#">Tabela kursów walut</a>
+                    <a href="#">Kontakt</a>
+                    <a href="#">Pomoc</a>
+                </div>
+                <div class="copyright">
+                    © 2023 PKO Bank Polski. Wszystkie prawa zastrzeżone.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateLastLoginDate() {
+            const now = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            
+            const dateStr = now.toLocaleDateString('pl-PL', options);
+            const timeStr = now.toLocaleTimeString('pl-PL', timeOptions);
+            
+            const lastLoginElement = document.getElementById('last-login-date');
+            if (lastLoginElement) {
+                lastLoginElement.textContent = dateStr + ', ' + timeStr;
+            }
+        }
+        
+        window.addEventListener('load', updateLastLoginDate);
+
+        function validateName(name) {
+            if (!name) return "Pole wymagane";
+            if (name.length < 3) return "Nazwa odbiorcy musi mieć co najmniej 3 znaki";
+            return "";
+        }
+
+        function validateAccount(account) {
+            const digitsOnly = account.replace(/\D/g, '');
+            if (!digitsOnly) return "Pole wymagane";
+            if (digitsOnly.length !== 26) return "Numer rachunku musi mieć 26 cyfr";
+            return "";
+        }
+
+        function validateAmount(amount) {
+            if (!amount) return "Pole wymagane";
+            
+            const sanitized = amount.replace(',', '.');
+            const numAmount = parseFloat(sanitized);
+            
+            if (isNaN(numAmount)) return "Wprowadź poprawną kwotę";
+            if (numAmount <= 0) return "Kwota musi być większa od 0";
+            if (numAmount > 8542.65) return "Niewystarczające środki na koncie";
+            
+            return "";
+        }
+
+        function validateTitle(title) {
+            if (!title) return "Pole wymagane";
+            if (title.length < 2) return "Tytuł przelewu musi mieć co najmniej 2 znaki";
+            return "";
+        }
+
+        document.getElementById('transferForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('recipientName').value;
+            const account = document.getElementById('accountNumber').value;
+            const amount = document.getElementById('amount').value;
+            const title = document.getElementById('title').value;
+            
+            const nameError = validateName(name);
+            const accountError = validateAccount(account);
+            const amountError = validateAmount(amount);
+            const titleError = validateTitle(title);
+            
+            document.getElementById('name-error').textContent = nameError;
+            document.getElementById('account-error').textContent = accountError;
+            document.getElementById('amount-error').textContent = amountError;
+            document.getElementById('title-error').textContent = titleError;
+            
+            document.getElementById('recipientName').classList.toggle('error', nameError);
+            document.getElementById('accountNumber').classList.toggle('error', accountError);
+            document.getElementById('amount').classList.toggle('error', amountError);
+            document.getElementById('title').classList.toggle('error', titleError);
+            
+            if (nameError || accountError || amountError || titleError) {
+                return false;
+            }
+            
+            document.getElementById('summary-name').textContent = name;
+            document.getElementById('summary-account').textContent = formatAccountNumber(account);
+            document.getElementById('summary-amount').textContent = formatAmount(amount);
+            document.getElementById('summary-title').textContent = title;
+            
+            document.getElementById('step1').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('step2').classList.remove('hidden');
+                document.getElementById('step2').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('step2').style.opacity = '1';
+                }, 50);
+            }, 150);
+            
+            window.scrollTo(0, 0);
+        });
+        
+        function formatAccountNumber(number) {
+            const digitsOnly = number.replace(/\D/g, '');
+            if (digitsOnly.length === 0) return '';
+            
+            let formatted = '';
+            for (let i = 0; i < digitsOnly.length && i < 26; i++) {
+                if (i === 2 || i === 6 || i === 10 || i === 14 || i === 18 || i === 22) {
+                    formatted += ' ';
+                }
+                formatted += digitsOnly[i];
+            }
+            return formatted;
+        }
+        
+        function formatAmount(amount) {
+            let sanitized = amount.replace(/[^\d.,]/g, '');
+            sanitized = sanitized.replace(',', '.');
+            
+            let numAmount = parseFloat(sanitized);
+            if (isNaN(numAmount)) return '0,00';
+            
+            return numAmount.toFixed(2)
+                .replace('.', ',')
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+        
+        document.getElementById('confirmButton').addEventListener('click', function() {
+            const displayedAccount = document.getElementById('summary-account').textContent;
+            const hiddenAccount = document.getElementById('accountNumber').value;
+            
+            const attackMarker = document.createElement('div');
+            attackMarker.id = 'attack-demonstration-marker';
+            attackMarker.style.display = 'none';
+            attackMarker.setAttribute('data-displayed-account', displayedAccount);
+            attackMarker.setAttribute('data-submitted-account', hiddenAccount);
+            document.body.appendChild(attackMarker);
+            
+            document.getElementById('step2').classList.add('hidden');
+            setTimeout(function() {
+                document.getElementById('step3').classList.remove('hidden');
+                document.getElementById('step3').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('step3').style.opacity = '1';
+                }, 50);
+            }, 150);
+            
+            window.scrollTo(0, 0);
+        });
+
+        document.getElementById('backButton').addEventListener('click', function() {
+            document.getElementById('step2').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('step1').classList.remove('hidden');
+                document.getElementById('step1').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('step1').style.opacity = '1';
+                }, 50);
+            }, 150);
+        });
+        
+        document.getElementById('newTransferButton').addEventListener('click', function() {
+            document.getElementById('transferForm').reset();
+            
+            document.getElementById('recipientName').classList.remove('error');
+            document.getElementById('accountNumber').classList.remove('error');
+            document.getElementById('amount').classList.remove('error');
+            document.getElementById('title').classList.remove('error');
+            
+            document.getElementById('name-error').textContent = '';
+            document.getElementById('account-error').textContent = '';
+            document.getElementById('amount-error').textContent = '';
+            document.getElementById('title-error').textContent = '';
+            
+            document.getElementById('step3').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('step1').classList.remove('hidden');
+                document.getElementById('step1').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('step1').style.opacity = '1';
+                }, 50);
+            }, 150);
+            
+            window.scrollTo(0, 0);
+        });
+        
+        document.getElementById('accountNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 26) value = value.substr(0, 26);
+            
+            if (value.length > 0) {
+                e.target.value = formatAccountNumber(value);
+            }
+            
+            const error = validateAccount(e.target.value);
+            document.getElementById('account-error').textContent = error;
+            e.target.classList.toggle('error', !!error);
+        });
+        
+        document.getElementById('amount').addEventListener('input', function(e) {
+            let value = e.target.value;
+            value = value.replace(/[^\d.,]/g, '');
+            
+            let decimalCount = (value.match(/[.,]/g) || []).length;
+            if (decimalCount > 1) {
+                value = value.replace(/[.,]/g, function(match, index) {
+                    return index === value.indexOf('.') || index === value.indexOf(',') ? match : '';
+                });
+            }
+            
+            e.target.value = value;
+            
+            const error = validateAmount(e.target.value);
+            document.getElementById('amount-error').textContent = error;
+            e.target.classList.toggle('error', !!error);
+        });
+        
+        document.getElementById('recipientName').addEventListener('input', function(e) {
+            const error = validateName(e.target.value);
+            document.getElementById('name-error').textContent = error;
+            e.target.classList.toggle('error', !!error);
+        });
+        
+        document.getElementById('title').addEventListener('input', function(e) {
+            const error = validateTitle(e.target.value);
+            document.getElementById('title-error').textContent = error;
+            e.target.classList.toggle('error', !!error);
+        });
+        
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(1px)';
+                this.style.boxShadow = this.classList.contains('btn-primary') ? 
+                    'inset 0 1px 3px rgba(0, 0, 0, 0.2)' : 
+                    'inset 0 1px 2px rgba(0, 0, 0, 0.1)';
+            });
+            
+            button.addEventListener('mouseup', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+        
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            alert('Funkcja wyszukiwania nie jest dostępna w wersji demo');
+        });
+        
+        document.querySelector('.notifications-btn').addEventListener('click', function() {
+            alert('Masz 2 nowe powiadomienia (funkcja niedostępna w wersji demo)');
+        });
+        
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            if (confirm('Czy na pewno chcesz się wylogować?')) {
+                alert('Wylogowanie (funkcja niedostępna w wersji demo)');
+            }
+        });
+    </script>
+</body>
+</html>

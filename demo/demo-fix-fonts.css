@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'PKOBankPolski';
+    src: local('Arial');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PKOBankPolski-bold';
+    src: local('Arial');
+    font-weight: bold;
+    font-style: normal;
+}
